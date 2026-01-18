@@ -1,0 +1,15 @@
+name: Keep Flask API Awake
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes
+  workflow_dispatch:        # allows manual run
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Flask API
+        run: |
+          echo "Pinging API..."
+          curl -L --max-time 60 https://business-matching-ai.onrender.com/ || true
